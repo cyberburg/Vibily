@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Small Business Guide to AI Agents in 2026 — Vibily Blog</title>
+<meta name="description" content="You don't need a million-dollar budget to run AI agents. Here's how small teams are deploying autonomous workflows for under $500/month.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050508;--surface:#0a0a10;--border:#1a1a2e;--text:#e8e6e3;--text-dim:#7a7a8c;--accent:#00e5c7;--gold:#c9a84c}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.75}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.45rem;color:var(--text);text-decoration:none}
+.logo i{color:var(--accent);font-style:normal}
+.nav-r{display:flex;gap:2rem;align-items:center}
+.nav-r a{color:var(--text-dim);text-decoration:none;font-size:.85rem;transition:color .3s}
+.nav-r a:hover{color:var(--accent)}
+.post{max-width:740px;margin:0 auto;padding:8rem 2rem 5rem}
+.post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.post-cat{font-size:.6rem;padding:.25rem .7rem;border-radius:100px;border:1px solid var(--border);color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+.post-date{font-size:.75rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.post h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-.025em;margin-bottom:1rem}
+.post-excerpt{font-size:1.05rem;color:var(--text-dim);line-height:1.7;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.post-author{display:flex;align-items:center;gap:.75rem;margin-bottom:3rem}
+.post-author-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(0,229,199,.15),rgba(201,168,76,.1));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--accent)}
+.post-author-name{font-size:.88rem;font-weight:600}
+.post-author-role{font-size:.72rem;color:var(--text-dim)}
+.post-content h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin:2.5rem 0 1rem;color:var(--text)}
+.post-content h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin:2rem 0 .75rem;color:var(--accent)}
+.post-content p{font-size:.95rem;color:var(--text-dim);margin-bottom:1.2rem;line-height:1.85}
+.post-content ul,.post-content ol{margin:.5rem 0 1.2rem 1.5rem}
+.post-content li{font-size:.92rem;color:var(--text-dim);margin-bottom:.5rem;line-height:1.7}
+.post-content strong{color:var(--text)}
+.post-content blockquote{margin:1.5rem 0;padding:1rem 1.5rem;border-left:3px solid var(--accent);background:rgba(0,229,199,.03);border-radius:0 8px 8px 0;font-style:italic;color:var(--text);font-size:.95rem}
+.callout{padding:1.5rem;border-radius:12px;background:var(--surface);border:1px solid var(--border);margin:1.5rem 0}
+.callout-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+.cost-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem}
+.cost-table th{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;padding:.6rem .8rem;border-bottom:1px solid var(--border);text-align:left}
+.cost-table td{padding:.7rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-dim);vertical-align:top}
+.cost-table td:first-child{color:var(--text);font-weight:500}
+.cost-table td:last-child{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.post-cta{margin-top:3rem;padding:2.5rem;border-radius:16px;background:var(--surface);border:1px solid var(--border);text-align:center}
+.post-cta h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
+.post-cta p{font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem}
+.post-cta a{display:inline-block;padding:.8rem 2rem;background:var(--accent);color:#050508;border-radius:100px;font-weight:700;font-size:.85rem;text-decoration:none;transition:all .3s}
+.post-cta a:hover{box-shadow:0 6px 22px rgba(0,229,199,.25)}
+.related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.related h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.25rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.related-card{padding:1.25rem;border-radius:12px;background:var(--surface);border:1px solid var(--border);text-decoration:none;transition:all .3s;display:block}
+.related-card:hover{border-color:rgba(0,229,199,.15);transform:translateY(-2px)}
+.related-card .rc-meta{font-size:.58rem;color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.related-card h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);line-height:1.35}
+footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;font-size:.72rem;color:var(--text-dim)}
+footer a{color:var(--text-dim);text-decoration:none;margin:0 .5rem}
+footer a:hover{color:var(--accent)}
+@media(max-width:640px){nav{padding:.9rem 1.5rem}.post{padding:6rem 1.5rem 3rem}.related-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">Vib<i>i</i>ly</a>
+  <div class="nav-r">
+    <a href="../index.html#blog">← All Posts</a>
+    <a href="../index.html#contact">Book a Call</a>
+  </div>
+</nav>
+<article class="post">
+  <div class="post-meta">
+    <span class="post-cat">Getting Started</span>
+    <span class="post-date">May 2026 · 10 min read</span>
+  </div>
+  <h1>The Small Business Guide to AI Agents in 2026</h1>
+  <p class="post-excerpt">You don't need a million-dollar budget or a team of engineers to run AI agents. Small businesses are deploying autonomous workflows for under $500/month and getting results that would have cost ten times as much just two years ago. Here's exactly how to do it.</p>
+  <div class="post-author">
+    <div class="post-author-av">Y</div>
+    <div><div class="post-author-name">Yomi</div><div class="post-author-role">Founder, Vibily</div></div>
+  </div>
+  <div class="post-content">
+    <p>The conversation around AI agents has been dominated by enterprise case studies — large corporations with dedicated AI teams, six-figure budgets, and months of implementation time. This has created a false impression that AI agents are out of reach for small businesses.</p>
+    <p>That's no longer true. The tooling has matured, the costs have dropped dramatically, and the barrier to entry is lower than it's ever been. A 5-person team can now run the same quality of AI automation that would have required a dedicated engineering team just two years ago.</p>
+
+    <h2>What Is an AI Agent, Actually?</h2>
+    <p>Before we get into the how, let's be clear about the what. An AI agent is a system that can take actions autonomously — not just respond to prompts, but actually do things: browse the web, read and send emails, update databases, generate documents, post to social media, or trigger other software tools.</p>
+    <p>The key word is autonomous. A chatbot that answers questions is not an agent. An agent is something that can receive a goal, figure out the steps to achieve it, and execute those steps without requiring a human at each decision point.</p>
+
+    <h2>The Under-$500/Month Stack</h2>
+    <p>Here's the exact stack we recommend for small businesses getting started with AI agents:</p>
+    <table class="cost-table">
+      <thead><tr><th>Tool</th><th>What It Does</th><th>Monthly Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Ollama</td><td>Run AI models locally — free inference for high-volume tasks</td><td>$0</td></tr>
+        <tr><td>n8n (self-hosted)</td><td>Workflow orchestration, connects everything together</td><td>$0–$20</td></tr>
+        <tr><td>AI API (usage-based)</td><td>Claude, OpenAI etc. for complex reasoning tasks</td><td>$30–$80</td></tr>
+        <tr><td>Supabase</td><td>Database for storing agent outputs and logs</td><td>$0–$25</td></tr>
+        <tr><td>VPS or Mac Mini</td><td>Hosts Ollama and n8n locally</td><td>$0–$20</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td><strong>$30–$145/mo</strong></td></tr>
+      </tbody>
+    </table>
+    <p>That's not a typo. A fully functional AI agent system — capable of running complex multi-step workflows autonomously — can cost under $150/month if you already have a computer capable of running Ollama.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Key Insight</div>
+      <p>Most AI costs come from API calls to proprietary models. By running a local model for high-volume, low-complexity tasks and reserving API calls for complex reasoning, you can cut costs by 70–90% without meaningful quality loss.</p>
+    </div>
+
+    <h2>The Best First Agent for a Small Business</h2>
+    <p>Don't start with a complex multi-agent system. Start with one agent that solves one specific problem. Here are the highest-ROI first agents we've seen for small businesses:</p>
+
+    <h3>1. The Email Triage Agent</h3>
+    <p>Reads your incoming email, categorizes it, drafts responses to routine inquiries, flags urgent items, and summarizes everything in a daily brief. A team of 3 that used to spend 2 hours per day on email gets that back.</p>
+
+    <h3>2. The Content Research Agent</h3>
+    <p>Given a topic, it researches trends, competitor content, and relevant news — then produces a structured brief ready for writing. Cuts content research from 3 hours to 15 minutes.</p>
+
+    <h3>3. The Lead Qualification Agent</h3>
+    <p>Monitors inbound leads from your website form, researches each company, scores the lead based on your criteria, and sends you a summary with a recommended next action. Never miss a hot lead again.</p>
+
+    <h3>4. The Reporting Agent</h3>
+    <p>Pulls data from your tools — analytics, CRM, ad accounts — and produces a weekly performance report in your preferred format. No more spending Sunday night building dashboards.</p>
+
+    <h2>How to Set Up Your First Agent in a Weekend</h2>
+    <p>Here's a simplified version of the process we follow with clients:</p>
+    <ol>
+      <li><strong>Pick your problem.</strong> Choose one specific, high-frequency task that costs you real time each week.</li>
+      <li><strong>Map the steps.</strong> Write out exactly what a human does when completing this task, step by step. This becomes your agent's workflow.</li>
+      <li><strong>Choose your tools.</strong> Identify which tools the agent will need to interact with. Most common business tools have APIs or n8n integrations.</li>
+      <li><strong>Build the workflow in n8n.</strong> Connect the steps using n8n's visual editor. You don't need to write code — most of it is drag and drop.</li>
+      <li><strong>Add the AI layer.</strong> Connect an AI model to handle the steps that require language understanding or generation.</li>
+      <li><strong>Test with real data.</strong> Run the workflow on 10–20 real examples and check the output quality.</li>
+      <li><strong>Deploy and monitor.</strong> Set the workflow to run automatically. Check the outputs daily for the first two weeks.</li>
+    </ol>
+
+    <h2>Common Mistakes Small Businesses Make</h2>
+    <p>After helping dozens of small businesses set up their first agents, these are the mistakes we see most often:</p>
+    <ul>
+      <li><strong>Trying to automate too much at once.</strong> One well-built agent is worth more than five half-built ones.</li>
+      <li><strong>Not building in error handling.</strong> What happens when the agent encounters something unexpected? You need a fallback.</li>
+      <li><strong>Skipping the monitoring step.</strong> Agents need supervision, especially early on. Set up logging so you can see what's happening.</li>
+      <li><strong>Using expensive API models for everything.</strong> Analyze your task volume and use local models for routine work.</li>
+      <li><strong>Building without documentation.</strong> Write down how the agent works so you (or someone else) can maintain it later.</li>
+    </ul>
+
+    <h2>When to Get Help</h2>
+    <p>There's a lot you can do yourself with the tools available today. But there are situations where getting professional help pays for itself quickly:</p>
+    <ul>
+      <li>When the automation touches customer-facing workflows where errors are costly</li>
+      <li>When you need custom integrations with proprietary or legacy systems</li>
+      <li>When you want a multi-agent system where different agents hand off to each other</li>
+      <li>When you need it done in days rather than weeks</li>
+    </ul>
+
+    <blockquote>"The businesses winning with AI agents aren't the ones with the biggest budgets — they're the ones who started small, built something that worked, and kept adding to it."</blockquote>
+
+    <p>The barrier to AI agents for small businesses is lower than it's ever been. The question isn't whether you can afford it — it's which problem you're going to solve first.</p>
+  </div>
+
+  <div class="post-cta">
+    <h3>Want Help Setting Up Your First AI Agent?</h3>
+    <p>Book a free 30-minute strategy call. We'll identify your highest-leverage automation opportunity and map out exactly how to build it.</p>
+    <a href="../index.html#contact">Book a Discovery Call →</a>
+  </div>
+
+  <div class="related">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="why-ai-automations-fail.html" class="related-card">
+        <div class="rc-meta">May 2026 · 6 min read</div>
+        <h4>Why Most AI Automations Fail (And How to Fix Yours)</h4>
+      </a>
+      <a href="multi-model-routing.html" class="related-card">
+        <div class="rc-meta">May 2026 · 8 min read</div>
+        <h4>Multi-Model Routing: The Right AI for Every Task</h4>
+      </a>
+    </div>
+  </div>
+</article>
+<footer>
+  <a href="../index.html">Home</a> · <a href="../index.html#blog">Blog</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a>
+  <br><br>© 2026 Vibily. All rights reserved.
+</footer>
+</body>
+</html>

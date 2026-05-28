@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Model Routing: The Right AI for Every Task — Vibily Blog</title>
+<meta name="description" content="Claude for reasoning, Gemma for speed, OpenAI for creative tasks — how we architect AI systems that optimize cost and quality simultaneously.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050508;--surface:#0a0a10;--border:#1a1a2e;--text:#e8e6e3;--text-dim:#7a7a8c;--text-xdim:#4a4a5c;--accent:#00e5c7;--gold:#c9a84c}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.75}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.45rem;color:var(--text);text-decoration:none}
+.logo i{color:var(--accent);font-style:normal}
+.nav-r{display:flex;gap:2rem;align-items:center}
+.nav-r a{color:var(--text-dim);text-decoration:none;font-size:.85rem;transition:color .3s}
+.nav-r a:hover{color:var(--accent)}
+.post{max-width:740px;margin:0 auto;padding:8rem 2rem 5rem}
+.post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.post-cat{font-size:.6rem;padding:.25rem .7rem;border-radius:100px;border:1px solid var(--border);color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+.post-date{font-size:.75rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.post h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-.025em;margin-bottom:1rem}
+.post-excerpt{font-size:1.05rem;color:var(--text-dim);line-height:1.7;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.post-author{display:flex;align-items:center;gap:.75rem;margin-bottom:3rem}
+.post-author-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(0,229,199,.15),rgba(201,168,76,.1));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--accent)}
+.post-author-name{font-size:.88rem;font-weight:600}
+.post-author-role{font-size:.72rem;color:var(--text-dim)}
+.post-content h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin:2.5rem 0 1rem;color:var(--text)}
+.post-content h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin:2rem 0 .75rem;color:var(--accent)}
+.post-content p{font-size:.95rem;color:var(--text-dim);margin-bottom:1.2rem;line-height:1.85}
+.post-content ul,.post-content ol{margin:.5rem 0 1.2rem 1.5rem}
+.post-content li{font-size:.92rem;color:var(--text-dim);margin-bottom:.5rem;line-height:1.7}
+.post-content strong{color:var(--text)}
+.post-content blockquote{margin:1.5rem 0;padding:1rem 1.5rem;border-left:3px solid var(--accent);background:rgba(0,229,199,.03);border-radius:0 8px 8px 0;font-style:italic;color:var(--text);font-size:.95rem}
+.callout{padding:1.5rem;border-radius:12px;background:var(--surface);border:1px solid var(--border);margin:1.5rem 0}
+.callout-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+.routing-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem}
+.routing-table th{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;padding:.6rem .8rem;border-bottom:1px solid var(--border);text-align:left}
+.routing-table td{padding:.7rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-dim);vertical-align:top}
+.routing-table td:first-child{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.post-cta{margin-top:3rem;padding:2.5rem;border-radius:16px;background:var(--surface);border:1px solid var(--border);text-align:center}
+.post-cta h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
+.post-cta p{font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem}
+.post-cta a{display:inline-block;padding:.8rem 2rem;background:var(--accent);color:#050508;border-radius:100px;font-weight:700;font-size:.85rem;text-decoration:none;transition:all .3s}
+.post-cta a:hover{box-shadow:0 6px 22px rgba(0,229,199,.25)}
+.related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.related h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.25rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.related-card{padding:1.25rem;border-radius:12px;background:var(--surface);border:1px solid var(--border);text-decoration:none;transition:all .3s;display:block}
+.related-card:hover{border-color:rgba(0,229,199,.15);transform:translateY(-2px)}
+.related-card .rc-meta{font-size:.58rem;color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.related-card h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);line-height:1.35}
+footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;font-size:.72rem;color:var(--text-dim)}
+footer a{color:var(--text-dim);text-decoration:none;margin:0 .5rem}
+footer a:hover{color:var(--accent)}
+@media(max-width:640px){nav{padding:.9rem 1.5rem}.post{padding:6rem 1.5rem 3rem}.related-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">Vib<i>i</i>ly</a>
+  <div class="nav-r">
+    <a href="../index.html#blog">← All Posts</a>
+    <a href="../index.html#contact">Book a Call</a>
+  </div>
+</nav>
+<article class="post">
+  <div class="post-meta">
+    <span class="post-cat">Architecture</span>
+    <span class="post-date">May 2026 · 8 min read</span>
+  </div>
+  <h1>Multi-Model Routing: The Right AI for Every Task</h1>
+  <p class="post-excerpt">Running every AI task through a single model is like using a Formula 1 car to go grocery shopping — technically it works, but you're paying for capability you don't need. Here's how we architect systems that match each task to the optimal model, cutting costs by 40–70% without sacrificing quality.</p>
+  <div class="post-author">
+    <div class="post-author-av">Y</div>
+    <div><div class="post-author-name">Yomi</div><div class="post-author-role">Founder, Vibily</div></div>
+  </div>
+  <div class="post-content">
+    <p>Most businesses that adopt AI start with a single model — usually one of the big proprietary ones — and route everything through it. This works, but it's expensive and often overkill. A model capable of writing a legal brief is massively overpowered for classifying a support ticket as "billing" or "technical."</p>
+    <p>Multi-model routing solves this by treating your AI infrastructure like a team of specialists: each model handles the tasks it's best suited for, and a routing layer decides who gets what.</p>
+
+    <h2>The Core Idea: Match Task Complexity to Model Capability</h2>
+    <p>Not all AI tasks are equal. Some require deep reasoning, nuanced understanding, and careful handling of ambiguity. Others are simple pattern recognition that any competent model can handle in milliseconds for a fraction of a cent.</p>
+    <p>The goal of model routing is to send each task to the cheapest model that can handle it reliably. The key word is reliably — you're not trying to squeeze every task through the cheapest option. You're finding the optimal cost-quality tradeoff for each task type.</p>
+
+    <h2>The Routing Decision Matrix</h2>
+    <p>Here's the framework we use to decide which model handles which task:</p>
+    <table class="routing-table">
+      <thead><tr><th>Model Type</th><th>Best For</th><th>Cost Level</th></tr></thead>
+      <tbody>
+        <tr><td>Local / Small</td><td>Classification, routing decisions, simple extraction, FAQ matching</td><td>Near zero</td></tr>
+        <tr><td>Fast Mid-Tier</td><td>Summarization, formatting, translation, template filling</td><td>Low</td></tr>
+        <tr><td>Reasoning Model</td><td>Complex analysis, multi-step reasoning, code review, nuanced decisions</td><td>Medium-High</td></tr>
+        <tr><td>Specialized</td><td>Audio, vision, code generation, embeddings</td><td>Varies</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A Real Example: AI Customer Support</h2>
+    <p>Here's how we architected a support system for a SaaS company. Before routing, they were running every support ticket through a premium reasoning model. Cost: around $800/month. After routing, cost dropped to under $180/month with better response quality on complex tickets.</p>
+    <h3>Tier 1: Local Classification</h3>
+    <p>Every incoming ticket hits a small local model first. Its only job is to classify: Is this billing, technical, account, or general? This costs essentially nothing and runs in under 50ms.</p>
+    <h3>Tier 2: Fast Response Generation</h3>
+    <p>Simple, common questions — password resets, plan explanations, basic how-tos — get handled by a fast mid-tier model. These are pre-loaded with product documentation and handle about 60% of all tickets.</p>
+    <h3>Tier 3: Deep Reasoning</h3>
+    <p>Complex technical issues, billing disputes, and escalations go to a premium reasoning model with full context. This is where quality matters most and it's worth the cost.</p>
+    <h3>Tier 4: Human Escalation</h3>
+    <p>Anything the AI flags as uncertain or sensitive goes straight to a human — with a full AI-generated summary of the context so the human can respond quickly.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Result</div>
+      <p>82% of tickets auto-resolved. 60% cost reduction. Customer satisfaction score improved from 4.2 to 4.8 because complex issues were handled by more capable models with better context than before.</p>
+    </div>
+
+    <h2>Building the Routing Layer</h2>
+    <p>The routing layer is the brain of the system. It receives incoming tasks, evaluates them against predefined criteria, and dispatches them to the right model. Here's what a basic routing decision looks like:</p>
+    <ul>
+      <li><strong>Task length:</strong> Very short inputs often need less processing power</li>
+      <li><strong>Task type:</strong> Classification vs. generation vs. analysis require different capabilities</li>
+      <li><strong>Confidence threshold:</strong> If a lower-tier model's confidence is below a threshold, escalate upward</li>
+      <li><strong>Context requirements:</strong> Tasks requiring long context windows need models that support them</li>
+      <li><strong>Latency requirements:</strong> Customer-facing tasks need fast responses; batch tasks can tolerate more processing time</li>
+    </ul>
+
+    <h2>Running Models Locally</h2>
+    <p>One of the most significant cost levers we've found is running smaller models locally using tools like Ollama. For high-volume, low-complexity tasks, a local model running on existing hardware can reduce API costs to near zero.</p>
+    <p>The tradeoff is setup complexity and the need for appropriate hardware. But for businesses processing thousands of AI tasks per day, the ROI calculation often favors local deployment for the right task types.</p>
+
+    <blockquote>"The best AI architecture for your business isn't the most powerful one — it's the one that applies the right capability to each problem at the lowest cost."</blockquote>
+
+    <h2>What to Watch Out For</h2>
+    <p>Multi-model routing adds architectural complexity. Before implementing it, make sure:</p>
+    <ul>
+      <li>You have sufficient volume to justify the complexity (routing overhead isn't worth it for low-volume use cases)</li>
+      <li>You have monitoring in place to catch routing errors</li>
+      <li>Your fallback logic is solid — if a lower-tier model fails or returns low-confidence output, the escalation path must work reliably</li>
+      <li>You're testing each tier independently before wiring them together</li>
+    </ul>
+    <p>Done right, multi-model routing is one of the highest-leverage optimizations available in AI system design. It's not just about cutting costs — it often improves quality too, because the right model for each task performs better than a general-purpose model doing everything.</p>
+  </div>
+
+  <div class="post-cta">
+    <h3>Want Us to Design Your Model Routing Architecture?</h3>
+    <p>Book a free 30-minute strategy call. We'll map out your AI infrastructure and find the optimal routing setup for your use case.</p>
+    <a href="../index.html#contact">Book a Discovery Call →</a>
+  </div>
+
+  <div class="related">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="why-ai-automations-fail.html" class="related-card">
+        <div class="rc-meta">May 2026 · 6 min read</div>
+        <h4>Why Most AI Automations Fail (And How to Fix Yours)</h4>
+      </a>
+      <a href="small-business-ai-agents-2026.html" class="related-card">
+        <div class="rc-meta">May 2026 · 10 min read</div>
+        <h4>The Small Business Guide to AI Agents in 2026</h4>
+      </a>
+    </div>
+  </div>
+</article>
+<footer>
+  <a href="../index.html">Home</a> · <a href="../index.html#blog">Blog</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a>
+  <br><br>© 2026 Vibily. All rights reserved.
+</footer>
+</body>
+</html>
