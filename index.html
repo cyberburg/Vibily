@@ -40,9 +40,12 @@ window.VIBILY_CONFIG = {
   email: "hello@vibily.com",
   phone: "",
   // === LEAD FORM ENDPOINT ===
-  // "local" = saves to localStorage. Replace with webhook URL for email delivery.
-  // e.g., "https://formspree.io/f/xxxxx" or your own endpoint
-  formEndpoint: "local",
+  // "netlify" = Netlify Forms (leads stored in the Netlify dashboard; form detection
+  //             must be ON in site settings — it is, as of 2026-07-02).
+  // "local"   = saves to localStorage ONLY (the visitor's own browser — leads never
+  //             reach us; this was silently the case before 2026-07-02).
+  // or a webhook URL, e.g. "https://formspree.io/f/xxxxx"
+  formEndpoint: "netlify",
   // === FOUNDER INFO ===
   founder: {
     name: "Yomi",
@@ -925,6 +928,15 @@ document.addEventListener('click',e=>{const card=e.target.closest('.pf-card');if
 
 // === BLOG DATA ===
 const blogPosts = [
+  {slug:'how-to-score-inbound-leads-with-ai-without-killing-fit',title:'How to Score Inbound Leads With AI Without Killing Fit',excerpt:'A practical scoring framework that prioritizes fit and commercial intent without flattening every edge case into dumb points.',meta:'Jun 2026',icon:'◩'},
+  {slug:'how-to-route-leads-to-the-right-owner-automatically',title:'How to Route Leads to the Right Owner Automatically',excerpt:'A practical routing system for assigning leads by fit, geography, offer match, and fallback review rules.',meta:'Jun 2026',icon:'◫'},
+  {slug:'how-to-document-business-rules-for-ai-workflows',title:'How to Document Business Rules for AI Workflows',excerpt:'Turn tribal knowledge into explicit workflow logic so your automations stop guessing and start behaving consistently.',meta:'Jun 2026',icon:'▦'},
+  {slug:'how-to-prepare-business-data-for-ai-agents',title:'How to Prepare Business Data for AI Agents',excerpt:'Clean up the business context your workflows depend on so agents run on structure instead of confident garbage.',meta:'Jun 2026',icon:'◪'},
+  {slug:'how-agencies-can-use-ai-for-client-reporting',title:'How Agencies Can Use AI for Client Reporting',excerpt:'A practical reporting workflow for agencies that want faster report assembly and better client-facing clarity.',meta:'Jun 2026',icon:'◬'},
+  {slug:'how-to-map-a-workflow-before-you-automate-it',title:'How to Map a Workflow Before You Automate It',excerpt:'A practical guide to mapping triggers, rules, handoffs, and review points before you let automation touch the workflow.',meta:'Jun 2026',icon:'▤'},
+  {slug:'ai-lead-qualification-workflow-for-service-businesses',title:'The AI Lead Qualification Workflow for Service Businesses',excerpt:'How to score, route, and respond to inbound leads faster without letting low-fit inquiries drain operator time.',meta:'Jun 2026',icon:'◐'},
+  {slug:'founder-inbox-triage-with-ai-agents',title:'Founder Inbox Triage With AI Agents',excerpt:'A practical system for classifying, summarizing, and routing founder inbox traffic so signal stops drowning in noise.',meta:'Jun 2026',icon:'▣'},
+  {slug:'ai-workflow-roi-framework-for-small-teams',title:'The AI Workflow ROI Framework for Small Teams',excerpt:'A blunt framework for deciding whether an AI workflow will actually pay for itself before you build it.',meta:'Jun 2026',icon:'◌'},
   {slug:'workflow-scoring-framework',title:'The 5-Point Framework for Deciding Which Workflows to Automate First',excerpt:'Score any workflow before you build. The prioritization system that prevents bad automation choices.',meta:'Jun 2026',icon:'◎'},
   {slug:'what-should-stay-human-in-ai-workflows',title:'What Should Stay Human When You Automate a Workflow',excerpt:'Human-in-the-loop is a feature, not a failure. The principled guide to keeping humans at the right points.',meta:'Jun 2026',icon:'⬟'},
   {slug:'signs-a-workflow-is-a-good-ai-agent-candidate',title:'Signs a Workflow Is a Good AI Agent Candidate',excerpt:'The blunt checklist for deciding whether a workflow is ready for AI or still too messy to trust.',meta:'Jun 2026',icon:'◉'},
@@ -1166,7 +1178,17 @@ function submitContact(){
 
   const leadData = {name,email,company,budget,service,message,source:'contact_form',tags:[service]};
 
-  if(CFG.formEndpoint==='local'){
+  if(CFG.formEndpoint==='netlify'){
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({'form-name':'vibily-contact',name,email,company,budget,service,message}).toString()})
+    .then(r=>{if(!r.ok)throw new Error('fail');
+      saveLead(leadData);msg.className='cf-msg success';msg.textContent='Message sent! We\'ll respond within 24 hours.';
+      document.getElementById('cfName').value='';document.getElementById('cfEmail').value='';
+      document.getElementById('cfCompany').value='';document.getElementById('cfBudget').value='';
+      document.getElementById('cfService').value='';document.getElementById('cfMessage').value='';})
+    .catch(()=>{saveLead(leadData);msg.className='cf-msg error';msg.textContent='Network issue — please email us at '+CFG.email})
+    .finally(()=>{btn.disabled=false;btn.textContent='Send Message →'});
+  } else if(CFG.formEndpoint==='local'){
     saveLead(leadData);
     setTimeout(()=>{
       btn.disabled=false;btn.textContent='Send Message →';
@@ -1187,9 +1209,16 @@ function submitNewsletter(){
   const email=document.getElementById('nlEmail').value.trim();
   const msg=document.getElementById('nlMsg');
   if(!email||!validateEmail(email)){msg.className='nl-msg error';msg.textContent='Please enter a valid email.';return}
-  saveLead({email,source:'newsletter',tags:['newsletter']});
-  msg.className='nl-msg success';msg.textContent='You\'re in! Check your inbox for a welcome email.';
-  document.getElementById('nlEmail').value='';
+  const finish=()=>{msg.className='nl-msg success';msg.textContent='You\'re in! We\'ll be in touch.';
+    document.getElementById('nlEmail').value=''};
+  if(CFG.formEndpoint==='netlify'){
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({'form-name':'vibily-newsletter',email}).toString()})
+    .then(r=>{if(!r.ok)throw new Error('fail');saveLead({email,source:'newsletter',tags:['newsletter']});finish()})
+    .catch(()=>{msg.className='nl-msg error';msg.textContent='Network issue — please try again.'});
+  } else {
+    saveLead({email,source:'newsletter',tags:['newsletter']});finish();
+  }
 }
 
 // === INIT ===
@@ -1197,5 +1226,15 @@ renderSocials();
 renderFounder();
 renderPortfolio();
 </script>
+
+<!-- Netlify Forms registration (static, required at deploy time for form detection) -->
+<form name="vibily-contact" data-netlify="true" netlify-honeypot="bot-field" style="display:none">
+  <input type="hidden" name="form-name" value="vibily-contact"><input name="bot-field">
+  <input name="name"><input name="email" type="email"><input name="company">
+  <input name="budget"><input name="service"><textarea name="message"></textarea>
+</form>
+<form name="vibily-newsletter" data-netlify="true" netlify-honeypot="bot-field" style="display:none">
+  <input type="hidden" name="form-name" value="vibily-newsletter"><input name="bot-field"><input name="email" type="email">
+</form>
 </body>
 </html>
