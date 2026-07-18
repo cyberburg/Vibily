@@ -661,7 +661,7 @@ footer{padding:3rem;border-top:1px solid var(--border)}
       <div class="faq-item"><div class="faq-q">What kind of businesses do you work with?</div><div class="faq-a">Any business automating with AI — e-commerce, SaaS, agencies, real estate, financial services. If you do repetitive work that could be smarter, we can help.</div></div>
       <div class="faq-item"><div class="faq-q">How long does a project take?</div><div class="faq-a">Single workflows: 1–2 weeks. Full multi-agent systems: 3–4 weeks. Scoped upfront, no surprises.</div></div>
       <div class="faq-item"><div class="faq-q">Do I need technical knowledge?</div><div class="faq-a">No. Systems are built for operators, not engineers. Full docs and training included.</div></div>
-      <div class="faq-item"><div class="faq-q">What AI models do you use?</div><div class="faq-a">Model-agnostic — Claude, OpenAI's GPT-5.6 Sol and Codex, GPT-4o, Gemma, Llama, Gemini. Each task gets the best model for cost, speed, and quality.</div></div>
+      <div class="faq-item"><div class="faq-q">What AI models do you use?</div><div class="faq-a">Model-agnostic — Claude, OpenAI's GPT-5.6 Sol and Codex, Gemma, Llama, Gemini. Each task gets the best model for cost, speed, and quality.</div></div>
       <div class="faq-item"><div class="faq-q">What about after the project?</div><div class="faq-a">Every project includes a support window. Continue on our retainer or run it yourself with our documentation.</div></div>
       <div class="faq-item"><div class="faq-q">Can you integrate with existing tools?</div><div class="faq-a">Yes — CRMs, Slack, Discord, Telegram, databases, APIs, spreadsheets. If it has an API, we connect it.</div></div>
     </div>
@@ -848,7 +848,7 @@ function renderFounder(){
 
 // === TECH STACK ===
 const techItems = [
-  {n:'Claude',c:'#00e5c7'},{n:'OpenAI',c:'#4da6ff'},{n:'GPT-5.6 Sol',c:'#4da6ff'},{n:'Codex',c:'#4da6ff'},{n:'GPT-4o',c:'#4da6ff'},{n:'Gemma',c:'#f0a030'},{n:'Gemini',c:'#a78bfa'},{n:'Llama 3',c:'#ff6b6b'},{n:'Mistral',c:'#ccc'},
+  {n:'Claude',c:'#00e5c7'},{n:'OpenAI',c:'#4da6ff'},{n:'GPT-5.6 Sol',c:'#4da6ff'},{n:'Codex',c:'#4da6ff'},{n:'Gemma',c:'#f0a030'},{n:'Gemini',c:'#a78bfa'},{n:'Llama 3',c:'#ff6b6b'},{n:'Mistral',c:'#ccc'},
   {n:'Ollama',c:'#00e5c7'},{n:'LangChain',c:'#4da6ff'},{n:'n8n',c:'#f0a030'},{n:'Python',c:'#00e5c7'},{n:'FastAPI',c:'#4da6ff'},{n:'Flask',c:'#a78bfa'},
   {n:'Redis',c:'#ff6b6b'},{n:'Supabase',c:'#00e5c7'},{n:'Docker',c:'#4da6ff'},{n:'ChromaDB',c:'#f0a030'},{n:'Pinecone',c:'#a78bfa'},{n:'Whisper',c:'#ccc'},
   {n:'ElevenLabs',c:'#ff6b6b'},{n:'Vercel',c:'#00e5c7'}
@@ -949,7 +949,7 @@ const blogPosts = [
 document.getElementById('blogGrid').innerHTML = blogPosts.map(p=>`<a class="bc rv" href="blog/${p.slug}.html"><div class="bc-thumb" style="background:linear-gradient(135deg,rgba(0,229,199,.05),rgba(201,168,76,.03))">${p.icon}</div><div class="bc-body"><div class="bc-meta">${p.meta}</div><h3>${p.title}</h3><p>${p.excerpt}</p><span class="bc-more">Read More →</span></div></a>`).join('');
 
 // === PARALLAX LOGOS ===
-const logos=['Claude','GPT-5.6 Sol','Codex','GPT-4o','Gemma','Llama 3','Gemini','Mistral','Anthropic','OpenAI','Google AI','Meta AI','Cohere','Perplexity','HuggingFace','LangChain','n8n','Ollama','Whisper','ElevenLabs','Pinecone','ChromaDB','Redis','Supabase','Docker','Python','FastAPI','Flask','Node.js','Vercel'];
+const logos=['Claude','GPT-5.6 Sol','Codex','Gemma','Llama 3','Gemini','Mistral','Anthropic','OpenAI','Google AI','Meta AI','Cohere','Perplexity','HuggingFace','LangChain','n8n','Ollama','Whisper','ElevenLabs','Pinecone','ChromaDB','Redis','Supabase','Docker','Python','FastAPI','Flask','Node.js','Vercel'];
 function fillLayer(el,n){const f=document.createDocumentFragment();for(let i=0;i<n;i++){const s=document.createElement('span');s.textContent=logos[i%logos.length];f.appendChild(s)}el.appendChild(f)}
 fillLayer(document.querySelector('.back'),55);
 fillLayer(document.querySelector('.mid'),40);
