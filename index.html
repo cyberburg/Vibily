@@ -943,7 +943,7 @@ const blogPosts = [
   {slug:'signs-a-workflow-should-not-be-automated-yet',title:'Signs a Workflow Should Not Be Automated Yet',excerpt:'When process chaos is the real problem, automation just helps it fail faster.',meta:'Jun 2026',icon:'✕'},
   {slug:'how-to-choose-first-workflow-to-automate',title:'How to Choose the First Workflow to Automate',excerpt:'The practical scoring framework for picking an AI workflow that will actually deliver value fast.',meta:'Jun 2026',icon:'⚙'},
   {slug:'why-ai-automations-fail',title:'Why Most AI Automations Fail (And How to Fix Yours)',excerpt:'The gap between "AI demo" and "AI in production" is where most projects die. Here\'s the framework we use.',meta:'Jun 2026',icon:'⬡'},
-  {slug:'multi-model-routing',title:'Multi-Model Routing: The Right AI for Every Task',excerpt:'Claude for reasoning, Gemma for speed, GPT for creative — how we optimize cost and quality.',meta:'Apr 2025',icon:'◈'},
+  {slug:'multi-model-routing',title:'Multi-Model Routing: The Right AI for Every Task',excerpt:'Claude and Codex for reasoning, Gemma for speed, Ollama for privacy — how we optimize cost and quality.',meta:'Jul 2026',icon:'◈'},
   {slug:'small-business-ai-agents-2026',title:'The Small Business Guide to AI Agents in 2026',excerpt:'You don\'t need a million-dollar budget. Deploy agents for under $500/month.',meta:'Mar 2025',icon:'⟁'}
 ];
 document.getElementById('blogGrid').innerHTML = blogPosts.map(p=>`<a class="bc rv" href="blog/${p.slug}.html"><div class="bc-thumb" style="background:linear-gradient(135deg,rgba(0,229,199,.05),rgba(201,168,76,.03))">${p.icon}</div><div class="bc-body"><div class="bc-meta">${p.meta}</div><h3>${p.title}</h3><p>${p.excerpt}</p><span class="bc-more">Read More →</span></div></a>`).join('');
