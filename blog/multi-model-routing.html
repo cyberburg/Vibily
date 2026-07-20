@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Multi-Model Routing: The Right AI for Every Task — Vibily Blog</title>
 <meta name="description" content="The gap between AI demo and AI in production is where most projects die. Here's the framework Vibily uses to bridge it.">
-<link rel="canonical" href="https://vibily.com/blog/why-ai-automations-fail.html">
+<link rel="canonical" href="https://vibily.com/blog/multi-model-routing.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -85,8 +85,8 @@ footer a:hover{color:var(--accent)}
 <article class="post">
   <div class="post-meta">
     <span class="post-cat">Architecture</span>
-    <span class="post-date">Coming Soon</span>
-    <span class="post-reading">8 min read</span>
+    <span class="post-date">Jul 2026</span>
+    <span class="post-reading">6 min read</span>
   </div>
   <h1>Multi-Model Routing: The Right AI for Every Task</h1>
   <p class="post-excerpt">Learn how to build AI systems that route each task to the optimal model — balancing cost, speed, and quality across proprietary and open-source options.</p>
@@ -100,15 +100,27 @@ footer a:hover{color:var(--accent)}
   </div>
 
   <div class="post-content">
-    <p><em>This article is coming soon. Check back shortly for the full post, or <a href="../index.html#contact" style="color:var(--accent)">get in touch</a> if you'd like to discuss AI automation for your business today.</em></p>
+    <p>Most teams pick one model and send every task through it. That works until the bill arrives, or until a task the model isn't suited for produces a bad result. The fix isn't a smarter single model — it's routing: matching each task to whichever model is actually the right tool for it.</p>
 
-    <h2>What You'll Learn</h2>
-    <p>This post will break down our approach to multi-model routing — when to use Claude vs GPT-4o vs Gemma vs local models, how to build a routing layer, and the cost savings you can expect.</p>
+    <h2>The Decision Matrix We Use</h2>
+    <p>Every task we route falls into one of four buckets:</p>
+    <ul>
+      <li><strong>Complex reasoning and code</strong> → Claude or OpenAI's GPT-5.6 Sol / Codex. These are the models we reach for on architecture decisions, multi-step agent logic, and anything where a wrong answer is expensive.</li>
+      <li><strong>High-volume, low-complexity tasks</strong> → smaller hosted models like Gemma or Llama 3. Classification, tagging, simple extraction — tasks where speed and cost matter more than reasoning depth.</li>
+      <li><strong>Privacy-sensitive or offline work</strong> → local inference via Ollama. No data leaves the machine, no per-token cost, at the price of some capability.</li>
+      <li><strong>Structured extraction</strong> → a fine-tuned small model where the task is narrow and repetitive enough that a general-purpose LLM is overkill.</li>
+    </ul>
+
+    <h2>Building the Routing Layer</h2>
+    <p>In practice this is a thin dispatch layer in front of your agents, not a separate product. A request comes in, gets classified by task type and complexity, and gets sent to the model tier that fits. The classification step can be as simple as a rules-based check (task type, input length, whether the output needs to be verifiable) — it doesn't need its own model in most small-business setups.</p>
 
     <div class="callout">
-      <div class="callout-title">Preview: The Routing Decision Matrix</div>
-      <p>Simple queries → local model (free). Complex reasoning → Claude (best quality). Creative tasks → GPT-4o (flexible). Structured extraction → fine-tuned small model (fast). Full breakdown coming soon.</p>
+      <div class="callout-title">Why This Matters for Cost</div>
+      <p>Sending everything through a frontier model because it's the best one is the single most common way we see AI automation budgets blow out. Routing the 80% of simple, high-volume tasks to a cheaper tier while reserving frontier models for the 20% that actually need them is usually where most of the savings live.</p>
     </div>
+
+    <h2>What to Actually Do</h2>
+    <p>If you're running everything through one model today, start by logging what each request actually needed — not what model handled it. Most teams find a large share of their traffic could have gone through a cheaper tier with no quality loss. That gap is where routing pays for itself.</p>
   </div>
 
   <div class="post-cta">
@@ -121,11 +133,11 @@ footer a:hover{color:var(--accent)}
     <h3>Related Articles</h3>
     <div class="related-grid">
       <a href="why-ai-automations-fail.html" class="related-card">
-        <div class="rc-meta">Coming Soon</div>
+        <div class="rc-meta">Architecture</div>
         <h4>Why Most AI Automations Fail</h4>
       </a>
       <a href="small-business-ai-agents-2026.html" class="related-card">
-        <div class="rc-meta">Coming Soon</div>
+        <div class="rc-meta">Guide</div>
         <h4>The Small Business Guide to AI Agents in 2026</h4>
       </a>
     </div>
